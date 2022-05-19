@@ -49,6 +49,7 @@ function App() {
       setClasses(spells.classes.map((item) => item.name).join(", "))
       setComponents(spells.components.map((item) => item).join(", "))
       setConcentration(spells.concentration ? 'true' : '')
+      setDesc(spells.desc.join("<br><br>"))
       setDuration(spells.duration)
       setLevel(spells.level)
       setMaterial(spells.material ? spells.material : "No materials")
