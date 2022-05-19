@@ -1,42 +1,13 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+:root {
+  --primary: #3E4756; /* 30 */
+  --secondary: #5C5B7C; /* 60 */
+  --accent: #8E5063; /* 10 */
+  --white: #f5f5f5;
 }
 
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 
 /* Spell Info Modal */
 .spellInfo {
@@ -45,89 +16,161 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: calc(100vw - 1rem);
   height: 95vh;
-  background: #f5f5f5;
+  background: var(--white);
+  border-radius: 21px 20px 0 0;
 }
-.spellInfo .leftCol {
-  max-width: 25%;
+.spellInfo .spellCol {
+  max-width: 20%;
   width: 100%;
-  background: #666666;
-}
-.spellInfo .leftCol .spellName {
-  /* Safari */
-  -webkit-transform: rotate(90deg);
-  /* Firefox */
-  -moz-transform: rotate(90deg);
-  /* IE */
-  -ms-transform: rotate(90deg);
-  /* Opera */
-  -o-transform: rotate(90deg);
-  font-size: 36px;
-  color: #ffffff;
-}
-.spellInfo .rightCol {
-  max-width: 75%;
-  width: 100%;
-}
-.spellInfo .rightCol .atkRitCon,
-.spellInfo .rightCol .mainSpellInfo {
-  padding: 1rem;
-}
-.spellInfo .rightCol .atkRitCon {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "attack ritual concentration";
-}
-.spellInfo .rightCol .atkRitCon .stackWrap {
+  background: var(--secondary);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 2rem 1rem;
+  border-radius: 0 20px 0 0;
   font-family: Roboto;
   letter-spacing: 0em;
   text-align: left;
 }
-.spellInfo .rightCol .atkRitCon .stackWrap.attack {
+.spellInfo .spellCol .level {
+  color: var(--accent);
+  font-size: 24px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spellInfo .spellCol .spellName {
+  width: max-content;
+  -webkit-transform: rotate(90deg) translateX(50%);
+  -moz-transform: rotate(90deg) translateX(50%);
+  -ms-transform: rotate(90deg) translateX(50%);
+  -o-transform: rotate(90deg) translateX(50%);
+  transform: rotate(90deg) translateX(50%);
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
+  -o-transform-origin: center;
+  transform-origin: center;
+  font-size: 36px;
+  color: var(--accent);
+}
+.spellInfo .spellCol .close {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: var(--white);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+.spellInfo .spellCol .close:hover {
+  transition: all 0.35s;
+  background-color: var(--white);
+  border: 2px solid rgba(0, 0, 0, 0);
+  color: var(--accent2);
+  cursor: pointer;
+}
+.spellInfo .infoCol {
+  max-width: 80%;
+  width: 100%;
+  overflow-y: auto;
+  border-radius: 20px 0 0 0;
+}
+.spellInfo .infoCol::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.spellInfo .infoCol::-webkit-scrollbar-track {
+  background: var(--accent);
+}
+
+/* Handle */
+.spellInfo .infoCol::-webkit-scrollbar-thumb {
+  background: var(--accent2);
+}
+
+/* Handle on hover */
+.spellInfo .infoCol::-webkit-scrollbar-thumb:hover {
+  background: var(--accent3);
+}
+.spellInfo .infoCol .atkRitCon,
+.spellInfo .infoCol .mainSpellInfo {
+  padding: 1rem;
+}
+.spellInfo .infoCol .atkRitCon {
+  background-color: var(--primary);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "attack ritual concentration";
+  gap: 1rem;
+  border-radius: 20px 0 0 0;
+  color: var(--white);
+}
+.spellInfo .infoCol .atkRitCon .stackWrap {
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.spellInfo .infoCol .atkRitCon .stackWrap.attack {
   grid-area: attack;
 }
-.spellInfo .rightCol .atkRitCon .stackWrap.ritual {
+.spellInfo .infoCol .atkRitCon .stackWrap.ritual {
   grid-area: ritual;
 }
-.spellInfo .rightCol .atkRitCon .stackWrap.concentration {
+.spellInfo .infoCol .atkRitCon .stackWrap.concentration {
   grid-area: concentration;
 }
-.spellInfo .rightCol .mainSpellInfo {
+.spellInfo .infoCol .mainSpellInfo {
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: "casting duration range" "components components components" "material material material" "damage damage damage" "description description description" "classes subclass .";
+  gap: 1rem;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap {
+.spellInfo .infoCol .mainSpellInfo .stackWrap {
   font-family: Roboto;
   letter-spacing: 0em;
   text-align: left;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.casting {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.casting {
   grid-area: casting;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.duration {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.duration {
   grid-area: duration;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.range {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.range {
   grid-area: range;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.components {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.components {
   grid-area: components;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.material {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.material {
   grid-area: material;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.description {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.description {
   grid-area: description;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.classes {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.classes {
   grid-area: classes;
 }
-.spellInfo .rightCol .mainSpellInfo .stackWrap.subclass {
+.spellInfo .infoCol .mainSpellInfo .stackWrap.subclass {
   grid-area: subclass;
 }
-.spellInfo .rightCol .mainSpellInfo .damage {
+.spellInfo .infoCol .mainSpellInfo .damage {
   grid-area: damage;
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
 }
