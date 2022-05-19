@@ -12,6 +12,7 @@ const url = "https://www.dnd5eapi.co"
 function App() {
   const [spellsUrl, setSpellsUrl] = useState(`${url}/api/spells`)
   const { error, isPending, data } = useFetch(spellsUrl)
+  const [scrollDisable, setScrollDisable] = useState(false)
 
   // Spell Info
   const [showSpell, setShowSpell] = useState(false)
@@ -64,18 +65,17 @@ function App() {
       console.log("error", error)
     }
   }
+  const handleClose = () => {
+    setShowSpell(false)
+  }
 
   return (
     <div className="App">
       {error && <p className="error">{error}</p>}
       {isPending && <p className="pending">Loading...</p>}
       {showSpell && (
-        <div className="spellInfo">
-          <div className="leftCol">
-            <span className="level">{level}</span>
-            <h2 className="spellName">{name}</h2>
-          </div>
-          <div className="rightCol">
+        <div className="spellInfo">   
+          <div className="infoCol">
             <div className="atkRitCon">
               <div className="stackWrap attack">
                 <h4>Attack</h4>
@@ -131,6 +131,11 @@ function App() {
                 <p>{subclass}</p>
               </div>
             </div>
+          </div>
+          <div className="spellCol">
+            <span className="level">{level}</span>
+            <h2 className="spellName">{name}</h2>
+            <div onClick={handleClose} className="close">X</div>
           </div>
         </div>
       )}
