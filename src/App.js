@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { useFetch } from "./hooks/useFetch"
 
 // styles
+import "./reset.css"
 import "./App.css"
 
 // components
@@ -22,7 +23,8 @@ function App() {
   const [classes, setClasses] = useState([])
   const [components, setComponents] = useState([])
   const [concentration, setConcentration] = useState(false)
-  const [damage, setDamage] = useState(null)
+  const [damageType, setDamageType] = useState("")
+  const [damageHigher, setDamageHigher] = useState([])
   const [higherDamage, setHigherDamage] = useState([])
   const [desc, setDesc] = useState([])
   const [duration, setDuration] = useState("")
@@ -52,9 +54,18 @@ function App() {
       setClasses(spells.classes.map((item) => item.name).join(", "))
       setComponents(spells.components.map((item) => item).join(", "))
       setConcentration(spells.concentration ? "true" : "")
-      setDamage(prevDamage => {
-        
-      })
+      setDamageType(
+        spells.damage ? spells.damage.damage_type.name : ""
+      )
+      if (spells.damage) {
+        if (spells.damage.damage_at_slot_level) {
+          setDamageHigher(Object.entries(spells.damage.damage_at_slot_level))
+        } else if (spells.damage.damage_at_character_level) {
+          setDamageHigher(Object.entries(spells.damage.damage_at_character_level))
+        } 
+      } else if (spells.heal_at_slot_level) {
+        setDamageHigher(Object.entries(spells.heal_at_slot_level))
+      }
       setDesc(spells.desc.join("<br><br>"))
       setDuration(spells.duration)
       setLevel(spells.level)
@@ -71,6 +82,7 @@ function App() {
     }
   }
   const handleClose = () => setShowSpell(false)
+  console.log("dmgHigher", damageHigher)
 
   return (
     <div className="App">
@@ -122,10 +134,21 @@ function App() {
                 <h4>Material</h4>
                 <p>{material}</p>
               </div>
-              <div className="damage">
-                <h4>Damage {damage}</h4>
-                <div className="levels"></div>
-              </div>
+              {damageType || damageHigher ? (
+                <div className="stackWrap damage">
+                  <h4>Damage ({damageType ? damageType : "healing"})</h4>
+                  <div className="levels">
+                    {damageHigher.map(item => (
+                      <div className="levelStack">
+                        <h5 key={item[0]}>Slot lvl: {item[0]}</h5>
+                        <p>{item[1]} {damageType}</p>
+                      </div>                      
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="stackWrap description">
                 <h4>Description</h4>
                 <p>{desc}</p>

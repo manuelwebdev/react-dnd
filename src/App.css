@@ -5,9 +5,11 @@
   --white: #f5f5f5;
 }
 
-.App-link {
-  color: #61dafb;
+
+h1, h2, h3, h4, h5, p, span {
+  margin: 0;
 }
+
 
 /* Spell Info Modal */
 .spellInfo {
@@ -99,6 +101,7 @@
 /* Handle */
 .spellInfo .infoCol::-webkit-scrollbar-thumb {
   background: var(--accent);
+  border-radius: 20px;
 }
 
 /* Handle on hover */
@@ -158,6 +161,38 @@
 }
 .spellInfo .infoCol .mainSpellInfo .stackWrap.material {
   grid-area: material;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: auto;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels::-webkit-scrollbar {
+  height: 10px;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels::-webkit-scrollbar-track {
+  background: #ebebeb;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 20px;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels::-webkit-scrollbar-thumb:hover {
+  background: var(--accent3);
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack {
+  height: min-content;
+  padding: 0 1rem;
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack p {
+  width: max-content;
 }
 .spellInfo .infoCol .mainSpellInfo .stackWrap.description {
   grid-area: description;
