@@ -22,6 +22,8 @@ function App() {
   const [classes, setClasses] = useState([])
   const [components, setComponents] = useState([])
   const [concentration, setConcentration] = useState(false)
+  const [damage, setDamage] = useState(null)
+  const [higherDamage, setHigherDamage] = useState([])
   const [desc, setDesc] = useState([])
   const [duration, setDuration] = useState("")
   const [higherLevel, setHigherLevel] = useState([])
@@ -49,14 +51,15 @@ function App() {
       setCastTime(spells.casting_time)
       setClasses(spells.classes.map((item) => item.name).join(", "))
       setComponents(spells.components.map((item) => item).join(", "))
-      setConcentration(spells.concentration ? 'true' : '')
+      setConcentration(spells.concentration ? "true" : "")
+      setDamage()
       setDesc(spells.desc.join("<br><br>"))
       setDuration(spells.duration)
       setLevel(spells.level)
       setMaterial(spells.material ? spells.material : "No materials")
       setName(spells.name)
       setRange(spells.range)
-      setRitual(spells.ritual ? 'true' : '')
+      setRitual(spells.ritual ? "true" : "")
       setSubclass(spells.subclasses.map((item) => item.name).join(", "))
       setShowSpell(true)
 
@@ -65,31 +68,34 @@ function App() {
       console.log("error", error)
     }
   }
-  const handleClose = () => {
-    setShowSpell(false)
-  }
+  const handleClose = () => setShowSpell(false)
 
   return (
     <div className="App">
       {error && <p className="error">{error}</p>}
       {isPending && <p className="pending">Loading...</p>}
       {showSpell && (
-        <div className="spellInfo">   
+        <div className="spellInfo">
           <div className="infoCol">
-            <div className="atkRitCon">
-              <div className="stackWrap attack">
-                <h4>Attack</h4>
-                <p>{attackType}</p>
+            {attackType || ritual || concentration ? (
+              <div className="atkRitCon">
+                <div className="stackWrap attack">
+                  <h4>Attack</h4>
+                  <p>{attackType}</p>
+                </div>
+                <div className="stackWrap ritual">
+                  <h4>Ritual</h4>
+                  <p>{ritual}</p>
+                </div>
+                <div className="stackWrap concentration">
+                  <h4>Concentration</h4>
+                  <p>{concentration}</p>
+                </div>
               </div>
-              <div className="stackWrap ritual">
-                <h4>Ritual</h4>
-                <p>{ritual}</p>
-              </div>
-              <div className="stackWrap concentration">
-                <h4>Concentration</h4>
-                <p>{concentration}</p>
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
+
             <div className="mainSpellInfo">
               <div className="stackWrap casting">
                 <h4>Casting Time</h4>
@@ -115,7 +121,7 @@ function App() {
                 <p>{material}</p>
               </div>
               <div className="damage">
-                <h4>Damage</h4>
+                <h4>Damage {damage}</h4>
                 <div className="levels"></div>
               </div>
               <div className="stackWrap description">
@@ -135,7 +141,9 @@ function App() {
           <div className="spellCol">
             <span className="level">{level}</span>
             <h2 className="spellName">{name}</h2>
-            <div onClick={handleClose} className="close">X</div>
+            <div onClick={handleClose} className="close">
+              X
+            </div>
           </div>
         </div>
       )}
