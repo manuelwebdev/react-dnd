@@ -52,7 +52,9 @@ function App() {
       setClasses(spells.classes.map((item) => item.name).join(", "))
       setComponents(spells.components.map((item) => item).join(", "))
       setConcentration(spells.concentration ? "true" : "")
-      setDamage()
+      setDamage(prevDamage => {
+        
+      })
       setDesc(spells.desc.join("<br><br>"))
       setDuration(spells.duration)
       setLevel(spells.level)
