@@ -67,8 +67,8 @@ export default function SingleSpell({ showSpell, spells }) {
   return (
     <>
       {showSpell && (
-        <div className="spellBackground">
-          <div className="spellInfo">
+        <div className="spellBackground" onClick={() => showSpell(close)}>
+          <div className="spellInfo" onClick={(e) => e.stopPropagation()}>
             <div className="infoCol">
               {attackType || ritual || concentration ? (
                 <div className="atkRitCon">

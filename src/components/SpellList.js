@@ -47,6 +47,7 @@ export default function SpellList({ url, data }) {
             key={spell.index}
             className="spellCard"
             data-endpoint={spell.url}
+            loading="lazy"
           >
             <h2>{spell.name}</h2>
             <button
