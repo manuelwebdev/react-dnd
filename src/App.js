@@ -4,10 +4,10 @@ import { useFetch } from "./hooks/useFetch"
 // styles
 import "./reset.css"
 import "./App.css"
-import SpellList from "./components/SpellList"
 
 // components
-// import SpellList from './components/SpellList';
+import SpellList from "./components/SpellList"
+import Navbar from "./components/Navbar"
 
 const url = "https://www.dnd5eapi.co"
 
@@ -18,6 +18,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       {error && <p className="error">{error}</p>}
       {isPending && <p className="pending">Loading...</p>}
       

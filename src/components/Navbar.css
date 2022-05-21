@@ -1,0 +1,12 @@
+.navbarWrap {
+  background-color: var(--primary);
+  color: var(--white)
+}
+.navbarWrap .navbar {
+    max-width: 1096px;
+    padding: 1rem 0;
+    margin: 0 auto;
+}
+.navbarWrap .navbar h1 {
+  font-size: 30px;
+}
