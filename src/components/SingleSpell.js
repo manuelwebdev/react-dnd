@@ -1,55 +1,70 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // styles
-import "./SpellList.css"
+import './SingleSpell.css'
 
-// components
-import SingleSpell from "./SingleSpell"
-
-export default function SpellList({ url, data }) {
-  const [showSpell, setShowSpell] = useState(false)
-  const [spells, setSpells] = useState(null)
+export default function SingleSpell({ showSpell, spells }) {
   // Spell Info
-//   const [areaEffect, setAreaEffect] = useState(null)
-//   const [attackType, setAttackType] = useState("")
-//   const [castTime, setCastTime] = useState("")
-//   const [classes, setClasses] = useState([])
-//   const [components, setComponents] = useState([])
-//   const [concentration, setConcentration] = useState(false)
-//   const [damageType, setDamageType] = useState("")
-//   const [damageHigher, setDamageHigher] = useState([])
-//   const [desc, setDesc] = useState([])
-//   const [descHigher, setDescHigher] = useState("")
-//   const [duration, setDuration] = useState("")
-//   const [level, setLevel] = useState("")
-//   const [material, setMaterial] = useState("")
-//   const [name, setName] = useState("")
-//   const [range, setRange] = useState("")
-//   const [ritual, setRitual] = useState(false)
-//   const [school, setSchool] = useState({})
-//   const [subclass, setSubclass] = useState([])
+  const [areaEffect, setAreaEffect] = useState(null)
+  const [attackType, setAttackType] = useState("")
+  const [castTime, setCastTime] = useState("")
+  const [classes, setClasses] = useState([])
+  const [components, setComponents] = useState([])
+  const [concentration, setConcentration] = useState(false)
+  const [damageType, setDamageType] = useState("")
+  const [damageHigher, setDamageHigher] = useState([])
+  const [desc, setDesc] = useState([])
+  const [descHigher, setDescHigher] = useState("")
+  const [duration, setDuration] = useState("")
+  const [level, setLevel] = useState("")
+  const [material, setMaterial] = useState("")
+  const [name, setName] = useState("")
+  const [range, setRange] = useState("")
+  const [ritual, setRitual] = useState(false)
+  //   const [school, setSchool] = useState({})
+  const [subclass, setSubclass] = useState([])
 
-  const handleClick = async (e) => {
-    // console.log("event", e.target.dataset["endpoint"])
-    try {
-      const res = await fetch(`${url}${e.target.dataset.endpoint}`)
-      const spells = await res.json()
-      console.log("spells", spells)
-      setSpells(spells)
-      setShowSpell(true)
-
-    //   console.log("e", typeof e.target)
-    } catch (error) {
-      console.log("error", error)
+  useEffect(() => {
+    if (showSpell) {
+      setAreaEffect(
+        spells.area_of_effect
+          ? `/ ${spells.area_of_effect.size} foot ${spells.area_of_effect.type}`
+          : ""
+      )
+      setAttackType(spells.attack_type ? spells.attack_type : null)
+      setCastTime(spells.casting_time)
+      setClasses(spells.classes.map((item) => item.name).join(", "))
+      setComponents(spells.components.map((item) => item).join(", "))
+      setConcentration(spells.concentration ? "true" : "")
+      setDamageType(spells.damage ? spells.damage.damage_type.name : "")
+      if (spells.damage) {
+        if (spells.damage.damage_at_slot_level) {
+          setDamageHigher(Object.entries(spells.damage.damage_at_slot_level))
+        } else if (spells.damage.damage_at_character_level) {
+          setDamageHigher(
+            Object.entries(spells.damage.damage_at_character_level)
+          )
+        }
+      } else if (spells.heal_at_slot_level) {
+        setDamageHigher(Object.entries(spells.heal_at_slot_level))
+      }
+      setDesc(spells.desc.join("<br><br>"))
+      if (spells.higher_level) {
+        setDescHigher(spells.higher_level[0])
+      }
+      setDuration(spells.duration)
+      setLevel(spells.level)
+      setMaterial(spells.material ? spells.material : "No materials")
+      setName(spells.name)
+      setRange(spells.range)
+      setRitual(spells.ritual ? "true" : "")
+      setSubclass(spells.subclasses.map((item) => item.name).join(", "))
     }
-  }
-
-  const handleClose = () => setShowSpell(false)
+  }, [showSpell])
 
   return (
     <>
-      {showSpell && <SingleSpell showSpell={showSpell} spells={spells} />}
-      {/* {showSpell && (
+      {showSpell && (
         <div className="spellInfo">
           <div className="infoCol">
             {attackType || ritual || concentration ? (
@@ -137,31 +152,10 @@ export default function SpellList({ url, data }) {
           <div className="spellCol">
             <span className="level">{level}</span>
             <h2 className="spellName">{name}</h2>
-            <div onClick={handleClose} className="close">
-              X
-            </div>
+            {/* <div onClick={handleClose} className="close"> */}X
           </div>
         </div>
-      )} */}
-      <div className="SpellList">
-        {data.results.map((spell) => (
-          <div
-            key={spell.index}
-            className="spellCard"
-            data-endpoint={spell.url}
-          >
-            <h2>{spell.name}</h2>
-            <button
-              id={spell.index}
-              onClick={handleClick}
-              className="spellBtn"
-              data-endpoint={spell.url}
-            >
-              Get Spell Info
-            </button>
-          </div>
-        ))}
-      </div>
+      )}
     </>
   )
 }
