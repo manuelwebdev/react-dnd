@@ -1,7 +1,10 @@
 :root {
   --primary: #3E4756; /* 30 */
+  --primary-hover: #2d343f;
   --secondary: #5C5B7C; /* 60 */
+  --secondary-hover: #51506d;
   --accent: #8E5063; /* 10 */
+  --accent-hover: #774453;
   --white: #f5f5f5;
 }
 
