@@ -5,7 +5,7 @@
     grid-template-columns:
     repeat(auto-fit, minmax(250px, max-content));
     gap: 1rem;
-    padding: 3rem 0;
+    padding: 3rem 1rem;
     color: var(--white)
 }
 .SpellList .spellCard {
