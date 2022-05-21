@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 // styles
-import './SingleSpell.css'
+import "./SingleSpell.css"
 
 export default function SingleSpell({ showSpell, spells }) {
   // Spell Info
@@ -23,6 +23,8 @@ export default function SingleSpell({ showSpell, spells }) {
   const [ritual, setRitual] = useState(false)
   //   const [school, setSchool] = useState({})
   const [subclass, setSubclass] = useState([])
+
+  const close = false
 
   useEffect(() => {
     if (showSpell) {
@@ -65,94 +67,98 @@ export default function SingleSpell({ showSpell, spells }) {
   return (
     <>
       {showSpell && (
-        <div className="spellInfo">
-          <div className="infoCol">
-            {attackType || ritual || concentration ? (
-              <div className="atkRitCon">
-                <div className="stackWrap attack">
-                  <h4>Attack</h4>
-                  <p>{attackType}</p>
-                </div>
-                <div className="stackWrap ritual">
-                  <h4>Ritual</h4>
-                  <p>{ritual}</p>
-                </div>
-                <div className="stackWrap concentration">
-                  <h4>Concentration</h4>
-                  <p>{concentration}</p>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-
-            <div className="mainSpellInfo">
-              <div className="stackWrap casting">
-                <h4>Casting Time</h4>
-                <p>{castTime}</p>
-              </div>
-              <div className="stackWrap duration">
-                <h4>Duration</h4>
-                <p>{duration}</p>
-              </div>
-              <div className="stackWrap range">
-                <h4>Range/Area</h4>
-                <p>
-                  {range}
-                  {areaEffect}
-                </p>
-              </div>
-              <div className="stackWrap components">
-                <h4>Components</h4>
-                <p>{components}</p>
-              </div>
-              <div className="stackWrap material">
-                <h4>Material</h4>
-                <p>{material}</p>
-              </div>
-              {damageType || damageHigher ? (
-                <div className="stackWrap damage">
-                  <h4>Damage ({damageType ? damageType : "healing"})</h4>
-                  <div className="levels">
-                    {damageHigher.map((item) => (
-                      <div key={item[0]} className="levelStack">
-                        <h5>Slot lvl: {item[0]}</h5>
-                        <p>
-                          {item[1]} {damageType}
-                        </p>
-                      </div>
-                    ))}
+        <div className="spellBackground">
+          <div className="spellInfo">
+            <div className="infoCol">
+              {attackType || ritual || concentration ? (
+                <div className="atkRitCon">
+                  <div className="stackWrap attack">
+                    <h4>Attack</h4>
+                    <p>{attackType}</p>
+                  </div>
+                  <div className="stackWrap ritual">
+                    <h4>Ritual</h4>
+                    <p>{ritual}</p>
+                  </div>
+                  <div className="stackWrap concentration">
+                    <h4>Concentration</h4>
+                    <p>{concentration}</p>
                   </div>
                 </div>
               ) : (
                 ""
               )}
-              <div className="stackWrap description">
-                <h4>Description</h4>
-                <p>{desc}</p>
-              </div>
-              {descHigher ? (
-                <div className="stackWrap descHigher">
-                  <h4>At Higher Levels</h4>
-                  <p>{descHigher}</p>
+
+              <div className="mainSpellInfo">
+                <div className="stackWrap casting">
+                  <h4>Casting Time</h4>
+                  <p>{castTime}</p>
                 </div>
-              ) : (
-                ""
-              )}
-              <div className="stackWrap classes">
-                <h4>Classes</h4>
-                <p>{classes}</p>
-              </div>
-              <div className="stackWrap subclass">
-                <h4>Subclasses</h4>
-                <p>{subclass}</p>
+                <div className="stackWrap duration">
+                  <h4>Duration</h4>
+                  <p>{duration}</p>
+                </div>
+                <div className="stackWrap range">
+                  <h4>Range/Area</h4>
+                  <p>
+                    {range}
+                    {areaEffect}
+                  </p>
+                </div>
+                <div className="stackWrap components">
+                  <h4>Components</h4>
+                  <p>{components}</p>
+                </div>
+                <div className="stackWrap material">
+                  <h4>Material</h4>
+                  <p>{material}</p>
+                </div>
+                {damageType || damageHigher ? (
+                  <div className="stackWrap damage">
+                    <h4>Damage ({damageType ? damageType : "healing"})</h4>
+                    <div className="levels">
+                      {damageHigher.map((item) => (
+                        <div key={item[0]} className="levelStack">
+                          <h5>Slot lvl: {item[0]}</h5>
+                          <p>
+                            {item[1]} {damageType}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <div className="stackWrap description">
+                  <h4>Description</h4>
+                  <p>{desc}</p>
+                </div>
+                {descHigher ? (
+                  <div className="stackWrap descHigher">
+                    <h4>At Higher Levels</h4>
+                    <p>{descHigher}</p>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <div className="stackWrap classes">
+                  <h4>Classes</h4>
+                  <p>{classes}</p>
+                </div>
+                <div className="stackWrap subclass">
+                  <h4>Subclasses</h4>
+                  <p>{subclass}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="spellCol">
-            <span className="level">{level}</span>
-            <h2 className="spellName">{name}</h2>
-            {/* <div onClick={handleClose} className="close"> */}X
+            <div className="spellCol">
+              <span className="level">{level}</span>
+              <h2 className="spellName">{name}</h2>
+              <div onClick={() => showSpell(close)} className="close">
+                X
+              </div>
+            </div>
           </div>
         </div>
       )}
