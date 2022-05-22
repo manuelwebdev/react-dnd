@@ -11,7 +11,7 @@ export default function Navbar() {
     <div className="navbarWrap">
         <div className="navbar">
             <h1>React D&D</h1>
-            <Search />
+            {/* <Search /> */}
         </div>
     </div>
   )
