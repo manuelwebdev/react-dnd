@@ -50,7 +50,7 @@ export default function SingleSpell({ showSpell, spells }) {
       } else if (spells.heal_at_slot_level) {
         setDamageHigher(Object.entries(spells.heal_at_slot_level))
       }
-      setDesc(spells.desc.join("<br><br>"))
+      setDesc(spells.desc)
       if (spells.higher_level) {
         setDescHigher(spells.higher_level[0])
       }
@@ -132,7 +132,7 @@ export default function SingleSpell({ showSpell, spells }) {
                 )}
                 <div className="stackWrap description">
                   <h4>Description</h4>
-                  <p>{desc}</p>
+                  {desc.map(part => (<p>{part}<br/><br/></p>))}
                 </div>
                 {descHigher ? (
                   <div className="stackWrap descHigher">
