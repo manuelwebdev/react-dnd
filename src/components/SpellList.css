@@ -17,7 +17,7 @@
     outline: 0px;
 }
 .Search .searchInput:focus {
-    transition: all .35s;
+    transition: max-width .35s;
     max-width: 400px;
     width: 100%;
     border: 2px solid var(--secondary);
