@@ -10,13 +10,17 @@ export default function SpellList({ url, data }) {
   const [showSpell, setShowSpell] = useState(false)
   const [spells, setSpells] = useState(null)
   const [scroll, setScroll] = useState(true)
-
+  const [spellList, setSpellList] = useState([])
+  const [query, setQuery] = useState("")
+  console.log("spellList", spellList)
   useEffect(() => {
     document.body.style.overflow = scroll ? "auto" : "hidden"
   }, [scroll])
-  
 
-  
+  useEffect(() => {
+    setSpellList(data.results.filter((item) => item.name.toLowerCase().includes(query)))
+  }, [query])
+
   const handleClick = async (e) => {
     // console.log("event", e.target.dataset["endpoint"])
     try {
@@ -26,28 +30,31 @@ export default function SpellList({ url, data }) {
       setScroll(false)
       setSpells(spells)
       setShowSpell(true)
-      
-      //   console.log("e", typeof e.target)
     } catch (error) {
       console.log("error", error)
     }
   }
-  
+
   const handleShowSpell = (close) => {
     setScroll(true)
     setShowSpell(close)
   }
-  
+
+  const handleSearch = (e) => {}
+
+  console.log(
+    "filtered", data.results.filter((item) => item.name.toLowerCase().includes(query)))
+
   return (
     <>
       {showSpell && <SingleSpell showSpell={handleShowSpell} spells={spells} />}
       <div className="SpellList">
-        {data.results.map((spell) => (
+        <input type="search" id="" onChange={(e) => setQuery(e.target.value)} />
+        {spellList && spellList.map((spell) => (
           <div
             key={spell.index}
             className="spellCard"
             data-endpoint={spell.url}
-            loading="lazy"
           >
             <h2>{spell.name}</h2>
             <button

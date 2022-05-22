@@ -16,6 +16,8 @@ function App() {
   const { error, isPending, data } = useFetch(spellsUrl)
   // const [scrollDisable, setScrollDisable] = useState(false)
 
+  console.log("fetch data: ", data)
+
   return (
     <div className="App">
       <Navbar />

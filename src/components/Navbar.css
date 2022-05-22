@@ -6,6 +6,8 @@
     max-width: 1096px;
     padding: 1rem;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
 .navbarWrap .navbar h1 {
   font-size: 30px;
