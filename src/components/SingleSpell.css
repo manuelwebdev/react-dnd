@@ -1,231 +1,454 @@
 /* Spell Info Modal */
 .spellBackground {
-    background-color: rgba(0, 0, 0, .5);
-    max-width: 100vw;
-    width: 100%;
-    min-width: 100%;
-    max-height: 95vh;
-    height: 100%;
-    min-height: 100%;
-    z-index: 999;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.5);
+  max-width: 100vw;
+  width: 100%;
+  min-width: 100%;
+  max-height: 95vh;
+  height: 100%;
+  min-height: 100%;
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
 }
 .spellInfo {
-    display: flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    height: 95%;
-    background: var(--white);
-    border-radius: 21px 20px 0 0;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  height: 95%;
+  background: var(--white);
+  border-radius: 21px 20px 0 0;
+}
+.spellInfo .spellCol {
+  width: 20%;
+  background: var(--secondary);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 2rem 1rem;
+  border-radius: 0 20px 0 0;
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.spellInfo .spellCol .level {
+  color: var(--white);
+  font-size: 24px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spellInfo .spellCol .spellName {
+  width: max-content;
+  -webkit-transform: rotate(90deg) translateX(50%);
+  -moz-transform: rotate(90deg) translateX(50%);
+  -ms-transform: rotate(90deg) translateX(50%);
+  -o-transform: rotate(90deg) translateX(50%);
+  transform: rotate(90deg) translateX(50%);
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
+  -o-transform-origin: center;
+  transform-origin: center;
+  font-size: 36px;
+  color: var(--white);
+}
+.spellInfo .spellCol .close {
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  color: var(--white);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+.spellInfo .spellCol .close:hover {
+  transition: all 0.35s;
+  background-color: var(--white);
+  border: 2px solid rgba(0, 0, 0, 0);
+  color: var(--accent2);
+  cursor: pointer;
+}
+.spellInfo .infoCol {
+  max-width: 80%;
+  width: 100%;
+  overflow-y: auto;
+  border-radius: 20px 0 0 0;
+}
+.spellInfo .infoCol::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.spellInfo .infoCol::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+/* Handle */
+.spellInfo .infoCol::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.spellInfo .infoCol::-webkit-scrollbar-thumb:hover {
+  background: var(--accent3);
+}
+.spellInfo .infoCol .atkRitCon,
+.spellInfo .infoCol .mainSpellInfo {
+  padding: 1rem;
+}
+.spellInfo .infoCol .atkRitCon {
+  background-color: var(--primary);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "attack ritual concentration";
+  gap: 1rem;
+  border-radius: 20px 0 0 0;
+  color: var(--white);
+}
+.spellInfo .infoCol .atkRitCon .stackWrap {
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.spellInfo .infoCol .atkRitCon .stackWrap.attack {
+  grid-area: attack;
+}
+.spellInfo .infoCol .atkRitCon .stackWrap.ritual {
+  grid-area: ritual;
+}
+.spellInfo .infoCol .atkRitCon .stackWrap.concentration {
+  grid-area: concentration;
+}
+.spellInfo .infoCol .mainSpellInfo {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "casting duration range" "components components components" "material material material" "damage damage damage" "description description description" "descHigher descHigher descHigher" "classes subclass .";
+  gap: 1rem;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap {
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.casting {
+  grid-area: casting;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.duration {
+  grid-area: duration;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.range {
+  grid-area: range;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.components {
+  grid-area: components;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.material {
+  grid-area: material;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: auto;
+}
+.spellInfo
+  .infoCol
+  .mainSpellInfo
+  .stackWrap.damage
+  .levels::-webkit-scrollbar {
+  height: 10px;
+}
+.spellInfo
+  .infoCol
+  .mainSpellInfo
+  .stackWrap.damage
+  .levels::-webkit-scrollbar-track {
+  background: #ebebeb;
+}
+.spellInfo
+  .infoCol
+  .mainSpellInfo
+  .stackWrap.damage
+  .levels::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 20px;
+}
+.spellInfo
+  .infoCol
+  .mainSpellInfo
+  .stackWrap.damage
+  .levels::-webkit-scrollbar-thumb:hover {
+  background: var(--accent3);
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack {
+  height: min-content;
+  padding: 1rem;
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack p,
+.spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack h5 {
+  width: max-content;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.description {
+  grid-area: description;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.descHigher {
+  grid-area: descHigher;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.classes {
+  grid-area: classes;
+}
+.spellInfo .infoCol .mainSpellInfo .stackWrap.subclass {
+  grid-area: subclass;
+}
+.spellInfo .infoCol .mainSpellInfo .damage {
+  grid-area: damage;
+  font-family: Roboto;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .spellBackground {
+  }
+  .spellInfo {
   }
   .spellInfo .spellCol {
-    width: 20%;
-    background: var(--secondary);
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    padding: 2rem 1rem;
-    border-radius: 0 20px 0 0;
-    font-family: Roboto;
-    letter-spacing: 0em;
-    text-align: left;
   }
   .spellInfo .spellCol .level {
-    color: var(--white);
-    font-size: 24px;
-    border: 2px solid var(--white);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   .spellInfo .spellCol .spellName {
-    width: max-content;
-    -webkit-transform: rotate(90deg) translateX(50%);
-    -moz-transform: rotate(90deg) translateX(50%);
-    -ms-transform: rotate(90deg) translateX(50%);
-    -o-transform: rotate(90deg) translateX(50%);
-    transform: rotate(90deg) translateX(50%);
-    -webkit-transform-origin: center;
-    -moz-transform-origin: center;
-    -ms-transform-origin: center;
-    -o-transform-origin: center;
-    transform-origin: center;
-    font-size: 36px;
-    color: var(--white);
   }
   .spellInfo .spellCol .close {
-    position: absolute;
-    bottom: 1rem;
-    right: 2rem;
-    color: var(--white);
-    border: 2px solid var(--white);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s;
   }
   .spellInfo .spellCol .close:hover {
-    transition: all 0.35s;
-    background-color: var(--white);
-    border: 2px solid rgba(0, 0, 0, 0);
-    color: var(--accent2);
-    cursor: pointer;
   }
   .spellInfo .infoCol {
-    max-width: 80%;
-    width: 100%;
-    overflow-y: auto;
-    border-radius: 20px 0 0 0;
   }
   .spellInfo .infoCol::-webkit-scrollbar {
-    width: 10px;
   }
-  
+
   /* Track */
   .spellInfo .infoCol::-webkit-scrollbar-track {
-    background: var(--white);
   }
-  
+
   /* Handle */
   .spellInfo .infoCol::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 20px;
   }
-  
+
   /* Handle on hover */
   .spellInfo .infoCol::-webkit-scrollbar-thumb:hover {
-    background: var(--accent3);
   }
   .spellInfo .infoCol .atkRitCon,
   .spellInfo .infoCol .mainSpellInfo {
-    padding: 1rem;
   }
   .spellInfo .infoCol .atkRitCon {
-    background-color: var(--primary);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "attack ritual concentration";
-    gap: 1rem;
-    border-radius: 20px 0 0 0;
-    color: var(--white);
   }
   .spellInfo .infoCol .atkRitCon .stackWrap {
-    font-family: Roboto;
-    letter-spacing: 0em;
-    text-align: left;
   }
   .spellInfo .infoCol .atkRitCon .stackWrap.attack {
-    grid-area: attack;
   }
   .spellInfo .infoCol .atkRitCon .stackWrap.ritual {
-    grid-area: ritual;
   }
   .spellInfo .infoCol .atkRitCon .stackWrap.concentration {
-    grid-area: concentration;
   }
   .spellInfo .infoCol .mainSpellInfo {
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "casting duration range" "components components components" "material material material" "damage damage damage" "description description description" "descHigher descHigher descHigher" "classes subclass .";
-    gap: 1rem;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap {
-    font-family: Roboto;
-    letter-spacing: 0em;
-    text-align: left;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.casting {
-    grid-area: casting;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.duration {
-    grid-area: duration;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.range {
-    grid-area: range;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.components {
-    grid-area: components;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.material {
-    grid-area: material;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.damage {
-    display: flex;
-    flex-flow: column nowrap;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels {
-    display: flex;
-    flex-flow: row nowrap;
-    overflow-x: auto;
   }
   .spellInfo
     .infoCol
     .mainSpellInfo
     .stackWrap.damage
     .levels::-webkit-scrollbar {
-    height: 10px;
   }
   .spellInfo
     .infoCol
     .mainSpellInfo
     .stackWrap.damage
     .levels::-webkit-scrollbar-track {
-    background: #ebebeb;
   }
   .spellInfo
     .infoCol
     .mainSpellInfo
     .stackWrap.damage
     .levels::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 20px;
   }
   .spellInfo
     .infoCol
     .mainSpellInfo
     .stackWrap.damage
     .levels::-webkit-scrollbar-thumb:hover {
-    background: var(--accent3);
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack {
-    height: min-content;
-    padding: 1rem;
-    font-family: Roboto;
-    letter-spacing: 0em;
-    text-align: left;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack p,
   .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack h5 {
-    width: max-content;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.description {
-    grid-area: description;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.descHigher {
-    grid-area: descHigher;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.classes {
-    grid-area: classes;
   }
   .spellInfo .infoCol .mainSpellInfo .stackWrap.subclass {
-    grid-area: subclass;
   }
   .spellInfo .infoCol .mainSpellInfo .damage {
-    grid-area: damage;
-    font-family: Roboto;
-    letter-spacing: 0em;
-    text-align: left;
   }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .spellBackground {
+        align-items: flex-end;
+        max-height: 100vh;
+    }
+    .spellInfo {
+        max-width: 500px;
+        height: 100%;
+    }
+    .spellInfo .spellCol {
+    }
+    .spellInfo .spellCol .level {
+    }
+    .spellInfo .spellCol .spellName {
+    }
+    .spellInfo .spellCol .close {
+    }
+    .spellInfo .spellCol .close:hover {
+    }
+    .spellInfo .infoCol {
+    }
+    .spellInfo .infoCol::-webkit-scrollbar {
+    }
   
+    /* Track */
+    .spellInfo .infoCol::-webkit-scrollbar-track {
+    }
+  
+    /* Handle */
+    .spellInfo .infoCol::-webkit-scrollbar-thumb {
+    }
+  
+    /* Handle on hover */
+    .spellInfo .infoCol::-webkit-scrollbar-thumb:hover {
+    }
+    .spellInfo .infoCol .atkRitCon,
+    .spellInfo .infoCol .mainSpellInfo {
+    }
+    .spellInfo .infoCol .atkRitCon {
+    }
+    .spellInfo .infoCol .atkRitCon .stackWrap {
+    }
+    .spellInfo .infoCol .atkRitCon .stackWrap.attack {
+    }
+    .spellInfo .infoCol .atkRitCon .stackWrap.ritual {
+    }
+    .spellInfo .infoCol .atkRitCon .stackWrap.concentration {
+    }
+    .spellInfo .infoCol .mainSpellInfo {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.casting {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.duration {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.range {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.components {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.material {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.damage {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels {
+    }
+    .spellInfo
+      .infoCol
+      .mainSpellInfo
+      .stackWrap.damage
+      .levels::-webkit-scrollbar {
+    }
+    .spellInfo
+      .infoCol
+      .mainSpellInfo
+      .stackWrap.damage
+      .levels::-webkit-scrollbar-track {
+    }
+    .spellInfo
+      .infoCol
+      .mainSpellInfo
+      .stackWrap.damage
+      .levels::-webkit-scrollbar-thumb {
+    }
+    .spellInfo
+      .infoCol
+      .mainSpellInfo
+      .stackWrap.damage
+      .levels::-webkit-scrollbar-thumb:hover {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack p,
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.damage .levels .levelStack h5 {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.description {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.descHigher {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.classes {
+    }
+    .spellInfo .infoCol .mainSpellInfo .stackWrap.subclass {
+    }
+    .spellInfo .infoCol .mainSpellInfo .damage {
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+}
