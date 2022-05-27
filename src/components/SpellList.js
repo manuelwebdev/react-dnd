@@ -42,10 +42,10 @@ export default function SpellList({ url, data }) {
     setShowSpell(close)
   }
 
-  console.log(
-    "filtered",
-    data.results.filter((item) => item.name.toLowerCase().includes(query))
-  )
+  // console.log(
+  //   "filtered",
+  //   data.results.filter((item) => item.name.toLowerCase().includes(query))
+  // )
 
   return (
     <>
